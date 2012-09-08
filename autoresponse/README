@@ -1,0 +1,15 @@
+This is a small bit of Python code that wraps various Request objects
+and returns a corresponding "Response". The responses, in this case,
+come from saved files on disk rather than from actually loading the
+web page.
+
+The intended use of this module is in automated testing of scraping
+code.
+
+For now, it targets only "scrapy". It'd be great to have a version of
+this that targeted "python-requests" as well.
+
+Contributions are very welcome, and we use the bug tracker in the Github
+project.
+
+Github URL: https://github.com/paulproteus/autoresponse
