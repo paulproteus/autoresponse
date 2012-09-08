@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='autoresponse',
@@ -6,5 +6,8 @@ setup(
     packages=['autoresponse'],
     license='Apache License 2.0',
     long_description=open('README').read(),
+    install_requires=[
+        'scrapy',
+        ],
 )
 
