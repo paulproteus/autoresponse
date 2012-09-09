@@ -1,5 +1,6 @@
 import twisted.python.failure
 import twisted.web.error
+import scrapy.http
 import scrapy.item
 
 
@@ -41,7 +42,18 @@ class Autoresponder(object):
 
             request = thing
             if request.url in self.url2filename:
-                raise NotImplemented
+                filename = self.url2filename[request.url]
+                with open(filename) as f:
+                    data = f.read()
+                response = scrapy.http.HtmlResponse(url=request.url,
+                                                    body=data)
+                response.request = request
+                results = request.callback(response)
+                if results:
+                    if isinstance(results, scrapy.item.Item):
+                        results = [results]
+                    work_queue.extend(results)
+                continue
 
             if request.url in self.url2errors:
                 status_code = self.url2errors[request.url]
@@ -52,4 +64,7 @@ class Autoresponder(object):
                     if isinstance(results, scrapy.item.Item):
                         results = [results]
                         work_queue.extend(results)
+                continue
+
+            raise KeyError
         return items
