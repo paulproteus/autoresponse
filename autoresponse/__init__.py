@@ -52,6 +52,8 @@ class Autoresponder(object):
                 if results:
                     if isinstance(results, scrapy.item.Item):
                         results = [results]
+                    if isinstance(results, scrapy.http.Request):
+                        results = [results]
                     work_queue.extend(results)
                 continue
 
