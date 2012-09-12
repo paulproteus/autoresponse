@@ -48,7 +48,11 @@ class Autoresponder(object):
                 response = scrapy.http.HtmlResponse(url=request.url,
                                                     body=data)
                 response.request = request
-                results = request.callback(response)
+                if hasattr(request, 'callback'):
+                    callback = request.callback
+                else:
+                    callback = request.deferred.callback
+                results = callback(response)
                 if results:
                     if isinstance(results, scrapy.item.Item):
                         results = [results]
