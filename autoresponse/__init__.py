@@ -61,7 +61,15 @@ class Autoresponder(object):
                 status_code = self.url2errors[request.url]
                 failure = (
                     Autoresponder.manufacture_http_failure(status_code))
-                results = request.errback(failure)
+
+                # Find the errback. Note that its location varies between versions
+                # of scrapy.
+                if hasattr(request, 'errback'):
+                    errback = request.errback
+                else:
+                    errback = request.deferred.errback
+
+                results = errback(failure)
                 if results:
                     if isinstance(results, scrapy.item.Item):
                         results = [results]
