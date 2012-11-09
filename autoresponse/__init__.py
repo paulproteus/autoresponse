@@ -77,7 +77,7 @@ class Autoresponder(object):
                 if results:
                     if isinstance(results, scrapy.item.Item):
                         results = [results]
-                        work_queue.extend(results)
+                    work_queue.extend(list(results))
                 continue
 
             raise KeyError
