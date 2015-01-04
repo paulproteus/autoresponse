@@ -6,6 +6,7 @@ setup(
     packages=['autoresponse'],
     license='Apache License 2.0',
     long_description=open('README').read(),
+    description='Package for automaticaly generating Response objects for scrapy.http.Request objects',
     install_requires=[
         'scrapy',
         ],
