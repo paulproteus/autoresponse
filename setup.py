@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='autoresponse',
     version='0.3.1',
-    description=('A Python package for automaticaly generating'
+    description=('A Python package for automatically generating'
                  ' Response objects for scrapy.http.Request objects'),
     url='https://github.com/paulproteus/autoresponse',
     packages=['autoresponse'],
